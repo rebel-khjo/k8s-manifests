@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: front
+    tire: frontend
+  name: front
+  namespace: todolist
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: front
+      tier: frontend
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: front
+        tier: frontend
+    spec:
+      containers:
+      - name: todo-client-vue
+        image: beer1/todo-client-vue:k8s
+        imagePullPolicy: Always
+        resources:
+          requests:
+            cpu: 300m
+            memory: 500Mi
+          limits:
+            cpu: 300m
+            memory: 500Mi
+status: {}
