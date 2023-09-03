@@ -23,23 +23,16 @@ spec:
         ports:
         - containerPort: 3306
           name: mysql
+        envFrom:
+        - configMapRef:
+            name: mysql
+        - secretRef:
+            name: mysql
         volumeMounts:
-        - name: mysql-pvc
-          mountPath: /var/lib/mysql
-        env:
-          - name: MYSQL_ROOT_PASSWORD
-            valueFrom: 
-              secretKeyRef:
-                name: mysql
-                key: ROOT_PASSWORD 
-                optional: false
-
-  volumeClaimTemplates:
-  - metadata:
-      name: mysql-pvc
-    spec:
-      accessModes: [ "ReadWriteOnce" ]
-      storageClassName: local-storage
-      resources:
-        requests:
-          storage: 5Gi
+          - name: config
+            mountPath: /etc/mysql/conf.d
+      volumes:
+        - name: config
+          configMap:
+            name: mysql-conf
+        

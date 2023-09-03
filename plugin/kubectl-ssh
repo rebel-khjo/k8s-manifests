@@ -1,0 +1,28 @@
+#!/bin/bash
+
+# 선택적 인수 처리
+if [[ "$1" == "version" ]]
+then
+    echo "1.0.0"
+    exit 0
+fi
+
+# 선택적 인수 처리
+if [[ "$1" == "config" ]]
+then
+    echo "$KUBECONFIG"
+    exit 0
+fi
+
+if [[ "$1" == "" ]]; then
+    kubectl get no -o jsonpath='NAME{"\t"}INTERNAL_IP{"\n"}{range .items[*]}{.metadata.name}{"\t"}{.status.addresses[?(@.type == "InternalIP")].address} {"\n"}{end}'
+
+else
+    IP=$(kubectl get no -o jsonpath='NAME{"\t"}INTERNAL_IP{"\n"}{range .items[*]}{.metadata.name}{"\t"}{.status.addresses[?(@.type == "InternalIP")].address} {"\n"}{end}' | grep $1 | awk '{print $2}')
+
+    if [[ "$IP" == "" ]]; then
+        echo "$1 은 존재하는 노드가 아닙니다."
+        exit 1
+    fi
+    ssh beer1@$IP
+fi
