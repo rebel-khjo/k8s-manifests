@@ -4,5 +4,5 @@ metadata:
   name: mysql
   namespace: middleware
 data:
-  MYSQL_USER: beerone
-  MYSQL_DATABASE: TODO
+  MYSQL_USER: todouser
+  MYSQL_DATABASE: todolist

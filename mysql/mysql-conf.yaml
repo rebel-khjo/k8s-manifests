@@ -39,3 +39,4 @@ data:
     pid-file=/var/run/mysqld/mysqld.pid
     [client]
     socket=/var/run/mysqld/mysqld.sock
+    bind-address="0.0.0.0"
