@@ -1,0 +1,73 @@
+app:
+  name: todo-api
+  replicas: 1
+  image: beer1/todo-server-kotlin:0.1.0
+  port: 9000
+  env:
+    - name: SPRING_PROFILES_ACTIVE
+      value: kubernetes
+  resources:
+    requests: 
+      cpu: 300m
+      memory: 500Mi
+    limits:
+      cpu: 300m
+      memory: 500Mi
+
+podLabels:
+  tier: backend
+
+probes:
+  readiness:
+    httpGet:
+      path: /actuator/health/readiness
+      port: 9000
+    initialDelaySeconds: 10
+    periodSeconds: 10
+  liveness: 
+    httpGet:
+      path: /actuator/health/liveness
+      port: 9000
+    initialDelaySeconds: 120
+    periodSeconds: 10
+
+service:
+  enabled: true
+
+rbac:
+  enabled: true
+  roleBinding:
+    autoCreate: true
+
+applicationYamlConfig: 
+  name: todo-api
+  value: |
+    spring:
+      datasource:
+        url: jdbc:mysql://mysql.middleware:3306/todolist?useSSL=false&allowPublicKeyRetrieval=true&characterEncoding=UTF-8&serverTimezone=UTC
+        username: todouser
+        driver-class-name: com.mysql.cj.jdbc.Driver
+
+      jpa:
+        show-sql: true
+        generate-ddl: false
+        database: mysql
+        database-platform: org.hibernate.dialect.MySQLDialect
+        hibernate:
+          naming:
+            physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+
+    cors:
+      origins: "*"
+      maxAge: 3600
+    test: 
+      data: configmap
+
+applicationYamlSecret:
+  name: todo-api
+  value: |
+    spring:
+      datasource:
+        password: toboBeer1!
+    test:
+      data: secret
