@@ -16,6 +16,7 @@ app:
 
 podLabels:
   tier: backend
+  test: test
 
 probes:
   readiness:
