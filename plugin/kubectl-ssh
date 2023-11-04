@@ -1,11 +1,21 @@
 #!/bin/bash
 
+for arg in "$@"
+do
+    if [[ "$arg" == "--help" ]] || [[ "$arg" == "-h" ]]; then
+        echo -e "Try ssh access to a specific node.\n"
+        echo -e "Examples:\n\n  # Shows the names and IPs of all nodes in the cluster.\n  kubectl ssh\n\n  # Try ssh access to worker-1 node.\n  kubectl ssh worker-1\n"
+        exit 0
+    fi
+done
+
 # 선택적 인수 처리
 if [[ "$1" == "version" ]]
 then
     echo "1.0.0"
     exit 0
 fi
+
 
 # 선택적 인수 처리
 if [[ "$1" == "config" ]]
