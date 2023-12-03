@@ -1,4 +1,3 @@
-buildNumber: 0
 app:
   name: todo-api
   replicas: 1
@@ -15,6 +14,9 @@ app:
       cpu: 300m
       memory: 500Mi
 
+podAnnotations:
+  buildNumber: build-0
+  
 podLabels:
   tier: backend
   test: test
