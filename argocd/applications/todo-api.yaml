@@ -1,0 +1,27 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: todo-api
+  namespace: argocd
+spec:
+  sources:
+    - repoURL: 'https://beer-one.github.io/charts'
+      targetRevision: 0.1.0
+      chart: spring-app
+      helm:
+        valueFiles:
+          - $values/todo-list/todo-api.yaml
+    - repoURL: 'https://github.com/beer-one/k8s-manifests.git'
+      targetRevision: main
+      ref: values
+  destination:
+    name: ''
+    namespace: todo
+    server: 'https://kubernetes.default.svc'
+  project: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: false
+    syncOptions:
+      - CreateNamespace=true
