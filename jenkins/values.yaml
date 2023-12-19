@@ -248,6 +248,9 @@ controller:
     - workflow-aggregator:596.v8c21c963d92d
     - git:5.1.0
     - configuration-as-code:1670.v564dc8b_982d0
+    - gradle:2.9
+    
+
 
   # Set to false to download the minimum required version of all dependencies.
   installLatestPlugins: true
@@ -824,14 +827,13 @@ agent:
 
 # Here you can add additional agents
 # They inherit all values from `agent` so you only need to specify values which differ
-additionalAgents: {}
-#  maven:
-#    podName: maven
-#    customJenkinsLabels: maven
-#    # An example of overriding the jnlp container
-#    # sideContainerName: jnlp
-#    image: jenkins/jnlp-agent-maven
-#    tag: latest
+additionalAgents: 
+ gradle-7.4.2-jdk17:
+   podName: gradle-7-4-2-jdk17
+   customJenkinsLabels: gradle-7-4-2-jdk17
+   image: beer1/jenkins-agent
+   tag: gradle-7.4.2-jdk17
+   idleMinutes: 10
 #  python:
 #    podName: python
 #    customJenkinsLabels: python
