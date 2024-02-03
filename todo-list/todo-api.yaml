@@ -1,7 +1,7 @@
 app:
   name: todo-api
   replicas: 1
-  image: beer1/todo-server-kotlin:0.1.0
+  image: beer1/todo-server-kotlin:test
   port: 9000
   env:
     - name: SPRING_PROFILES_ACTIVE
