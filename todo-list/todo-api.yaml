@@ -15,7 +15,7 @@ app:
       memory: 500Mi
 
 podAnnotations:
-  buildNumber: build-0
+  buildNumber: build-23
   
 podLabels:
   tier: backend
