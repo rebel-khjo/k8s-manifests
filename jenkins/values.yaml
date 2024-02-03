@@ -658,11 +658,11 @@ agent:
   resources:
     requests:
       cpu: "512m"
-      memory: "512Mi"
+      memory: "2048Mi"
       # ephemeralStorage:
     limits:
-      cpu: "512m"
-      memory: "512Mi"
+      cpu: "2"
+      memory: "2048Mi"
       # ephemeralStorage:
   livenessProbe: {}
 #    execArgs: "cat /tmp/healthy"
@@ -834,6 +834,7 @@ additionalAgents:
    image: beer1/jenkins-agent
    tag: gradle-7.4.2-jdk17
    idleMinutes: 10
+   alwaysPullImage: true
 #  python:
 #    podName: python
 #    customJenkinsLabels: python
