@@ -8,10 +8,10 @@ app:
       value: kubernetes
   resources:
     requests: 
-      cpu: 300m
+      cpu: "0.1"
       memory: 500Mi
     limits:
-      cpu: 300m
+      cpu: "1"
       memory: 500Mi
 
 podAnnotations:

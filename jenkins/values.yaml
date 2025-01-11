@@ -249,7 +249,10 @@ controller:
     - git:5.1.0
     - configuration-as-code:1670.v564dc8b_982d0
     - gradle:2.9
-    
+    - credentials:1319.v7eb_51b_3a_c97b_
+    - credentials-binding:657.v2b_19db_7d6e6d
+    - kubernetes-credentials-provider:1.258.v95949f923a_a_e
+    - plain-credentials:143.v1b_df8b_d3b_e48
 
 
   # Set to false to download the minimum required version of all dependencies.
@@ -897,7 +900,7 @@ networkPolicy:
 ## Install Default RBAC roles and bindings
 rbac:
   create: true
-  readSecrets: false
+  readSecrets: true
 
 serviceAccount:
   create: true
