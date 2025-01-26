@@ -1,0 +1,28 @@
+defaults:
+  revision: "1-23-4"
+
+  replicaCount: 1
+
+  autoscaling:
+    enabled: false
+
+  service:
+    type: ClusterIP
+
+  resources:
+    requests:
+      cpu: 100m
+      memory: 128Mi
+    limits:
+      cpu: 1000m
+      memory: 128Mi
+  
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+          - matchExpressions:
+              - key: schedule/istio
+                operator: In
+                values:
+                  - egress

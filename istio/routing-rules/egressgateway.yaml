@@ -1,0 +1,27 @@
+apiVersion: networking.istio.io/v1
+kind: Gateway
+metadata:
+  name: egressgateway
+  namespace: istio-system
+spec:
+  selector:
+    istio: egressgateway
+  servers:
+  
+  - hosts:
+    - edition.cnn.com
+    - www.naver.com
+    port:
+      number: 80
+      name: http
+      protocol: HTTP
+  
+  - hosts:
+    - edition.cnn.com
+    - www.naver.com
+    port:
+      number: 443
+      name: https
+      protocol: HTTPS
+    tls:
+      mode: PASSTHROUGH

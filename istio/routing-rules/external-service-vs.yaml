@@ -1,0 +1,30 @@
+apiVersion: networking.istio.io/v1
+kind: VirtualService
+metadata:
+  name: external-services
+  namespace: istio-system
+spec:
+  hosts:
+  - edition.cnn.com
+  - www.naver.com
+  gateways:
+  - mesh
+  http:
+  - name: default
+    route:
+      - destination:
+          host: egressgateway.istio-system.svc.cluster.local
+          subset: external-services
+
+  tls:
+  - match:
+      - port: 443
+        sniHosts:
+          - edition.cnn.com
+          - www.naver.com
+    route:
+      - destination:
+          host: egressgateway.istio-system.svc.cluster.local
+          subset: external-services
+          port:
+            number: 443

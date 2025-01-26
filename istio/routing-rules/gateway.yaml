@@ -1,0 +1,28 @@
+apiVersion: networking.istio.io/v1
+kind: Gateway
+metadata:
+  name: beer1-com
+  namespace: istio-system
+spec:
+  selector:
+    istio: ingressgateway
+  servers:
+  
+  - port:
+      number: 80
+      name: http
+      protocol: HTTP
+    hosts:
+    - bookinfo.beer1.com
+    tls:
+      httpsRedirect: true
+  
+  - port:
+      number: 443
+      name: https
+      protocol: HTTPS
+    hosts:
+    - bookinfo.beer1.com
+    tls:
+      mode: SIMPLE
+      credentialName: bookinfo

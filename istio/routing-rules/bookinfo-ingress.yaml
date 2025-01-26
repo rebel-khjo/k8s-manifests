@@ -1,0 +1,16 @@
+apiVersion: networking.istio.io/v1
+kind: VirtualService
+metadata:
+  name: bookinfo-ingress
+  namespace: istio-system
+spec:
+  hosts:
+  - bookinfo.beer1.com
+  gateways:
+  - beer1-com
+  http:
+  - route:
+    - destination:
+        host: productpage.bookinfo.svc.cluster.local
+        port: 
+          number: 9080

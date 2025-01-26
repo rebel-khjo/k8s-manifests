@@ -1,0 +1,9 @@
+[ v3_ca ]
+basicConstraints = critical,CA:TRUE
+subjectKeyIdentifier = hash
+authorityKeyIdentifier = keyid:always,issuer:always
+
+extendedKeyUsage = serverAuth,clientAuth
+subjectAltName = @alt_names
+[ alt_names ]
+DNS.1 = bookinfo.beer1.com

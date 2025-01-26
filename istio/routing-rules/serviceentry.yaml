@@ -1,0 +1,18 @@
+
+apiVersion: networking.istio.io/v1
+kind: ServiceEntry
+metadata:
+  name: external-svc-https
+  namespace: istio-system
+spec:
+  hosts:
+  - edition.cnn.com
+  - www.naver.com
+  ports:
+  - number: 80
+    name: http-port
+    protocol: HTTP
+  - number: 443
+    name: tls
+    protocol: TLS
+  resolution: DNS

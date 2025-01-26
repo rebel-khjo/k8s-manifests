@@ -1,0 +1,40 @@
+apiVersion: networking.istio.io/v1
+kind: VirtualService
+metadata:
+  name: egressgateway
+  namespace: istio-system
+spec:
+  hosts:
+  - edition.cnn.com
+  - www.naver.com
+  gateways:
+  - egressgateway
+  http:
+  - match:
+      - authority:
+          exact: edition.cnn.com
+    route:  
+      - destination:
+          host: edition.cnn.com
+  - match:
+      - authority:
+          exact: www.naver.com
+    route:  
+      - destination:
+          host: www.naver.com
+  tls: 
+    - match:
+        - port: 443
+          sniHosts:
+            - edition.cnn.com
+      route:
+        - destination:
+            host: edition.cnn.com
+    - match:
+        - port: 443
+          sniHosts:
+            - www.naver.com
+      route:
+        - destination:
+            host: www.naver.com
+      
