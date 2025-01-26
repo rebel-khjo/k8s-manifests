@@ -7,7 +7,7 @@ spec:
   sources:
     - repoURL: 'https://github.com/beer-one/k8s-manifests.git'
       targetRevision: main
-      path: istio/example/bookinfo.yaml
+      path: istio/example
   destination:
     name: ''
     namespace: bookinfo
