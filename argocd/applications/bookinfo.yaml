@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: bookinfo
+  namespace: argocd
+spec:
+  sources:
+    - repoURL: 'https://github.com/beer-one/k8s-manifests.git'
+      targetRevision: main
+      path: istio/example/bookinfo.yaml
+  destination:
+    name: ''
+    namespace: bookinfo
+    server: 'https://kubernetes.default.svc'
+  project: default
+  syncPolicy:
+    automated:
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
