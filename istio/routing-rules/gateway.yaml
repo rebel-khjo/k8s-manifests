@@ -13,9 +13,7 @@ spec:
       name: http
       protocol: HTTP
     hosts:
-    - bookinfo.beer1.com
-    tls:
-      httpsRedirect: true
+    - "*.beer1.com"
   
   - port:
       number: 443

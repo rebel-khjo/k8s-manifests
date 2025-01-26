@@ -1,0 +1,17 @@
+apiVersion: networking.istio.io/v1
+kind: VirtualService
+metadata:
+  name: argocd-ingress
+  namespace: argocd
+spec:
+  hosts:
+  - argocd.beer1.com
+  gateways:
+  - beer1-com.istio-system
+  http:
+  - name: argocd
+    route:
+    - destination:
+        host: argocd-server.argocd.svc.cluster.local
+        port: 
+          number: 80
