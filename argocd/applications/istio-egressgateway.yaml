@@ -9,6 +9,7 @@ spec:
       targetRevision: 1.23.4
       chart: gateway
       helm:
+        # releaseName: egressgateway
         valueFiles:
           - $values/istio/chart/egressgateway.yaml
     - repoURL: 'https://github.com/beer-one/k8s-manifests.git'
@@ -19,8 +20,8 @@ spec:
     namespace: istio-system
     server: 'https://kubernetes.default.svc'
   project: default
-  syncPolicy:
-    automated:
-      selfHeal: true
-    syncOptions:
-      - CreateNamespace=true
+  syncPolicy: {}
+    # automated:
+    #   selfHeal: true
+    # syncOptions:
+    #   - CreateNamespace=true
