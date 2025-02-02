@@ -2,36 +2,32 @@ apiVersion: networking.istio.io/v1
 kind: VirtualService
 metadata:
   name: reviews
+  namespace: bookinfo
 spec:
   hosts:
   - reviews
   http:
-  - match:
-    - headers:
-        end-user:
-          regex: "[a-n]+.*"
-    route:
-    - destination:
-        host: reviews
-        subset: v2
   - route:
-    - destination:
+    - weight: 3
+      destination:
         host: reviews
-        subset: v1
+        subset: blue
+    - weight: 1000
+      destination:
+        host: reviews
+        subset: green
 ---
 apiVersion: networking.istio.io/v1
 kind: DestinationRule
 metadata:
-  name: reviews-ab-test
+  name: reviews
+  namespace: bookinfo
 spec:
   host: reviews
   subsets:
-  - name: v1
+  - name: blue
     labels:
       version: v1
-  - name: v2
+  - name: green
     labels:
       version: v2
-  - name: v3
-    labels:
-      version: v3
