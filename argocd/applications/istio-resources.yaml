@@ -12,8 +12,4 @@ spec:
     name: ''
     server: 'https://kubernetes.default.svc'
   project: default
-  syncPolicy:
-    automated:
-      selfHeal: true
-    syncOptions:
-      - CreateNamespace=true
+  syncPolicy: {}
