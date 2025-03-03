@@ -20,7 +20,7 @@ spec:
       name: https
       protocol: HTTPS
     hosts:
-    - bookinfo.beer1.com
+    - "*.beer1.com"
     tls:
       mode: SIMPLE
       credentialName: bookinfo
