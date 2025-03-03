@@ -10,7 +10,7 @@ spec:
       chart: istiod
       helm:
         valueFiles:
-          - $values/istio/chart/istiod-1.24.3.yaml
+          - $values/istio/chart/istiod-1-24-3.yaml
     - repoURL: 'https://github.com/beer-one/k8s-manifests.git'
       targetRevision: main
       ref: values
