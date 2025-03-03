@@ -1,14 +1,13 @@
-defaults:
-  revision: "1-23-4"
+revision: "1-23-4"
 
-  autoscaling:
-    minReplicas: 2
-    maxReplicas: 3
+autoscaling:
+  minReplicas: 2
+  maxReplicas: 3
 
-  resources:
-    requests:
-      cpu: 100m
-      memory: 128Mi
-    limits:
-      cpu: 1000m
-      memory: 128Mi
+resources:
+  requests:
+    cpu: 100m
+    memory: 128Mi
+  limits:
+    cpu: 1000m
+    memory: 128Mi
