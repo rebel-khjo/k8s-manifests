@@ -1,6 +1,13 @@
 
 revision: "1-24-3"
 
+service:
+  type: None
+
+labels:
+  app: ingressgateway
+  istio: ingressgateway
+
 autoscaling:
   minReplicas: 2
   maxReplicas: 3
