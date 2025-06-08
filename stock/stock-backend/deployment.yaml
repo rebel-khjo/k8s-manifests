@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: stock-backend
+  name: stock-backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: stock-backend
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: stock-backend
+    spec:
+      containers:
+      - image: beer1/stock-backend:alpha
+        name: stock-backend
+        resources: 
+          requests: 
+            cpu: "0.2"
+            memory: 512Mi
+          limits:
+            cpu: "2"
+            memory: 512Mi
+        imagePullPolicy: Always
+        ports:
+          - name: http
+            protocol: TCP
+            containerPort: 8080
+        readinessProbe:
+          httpGet:
+            path: /health/readiness
+            port: http
+          failureThreshold: 1
+          periodSeconds: 10
+        livenessProbe:
+          httpGet:
+            path: /health/liveness
+            port: http
+          failureThreshold: 1
+          periodSeconds: 10
+        envFrom:
+          - secretRef:
+              name: postgres
+          - secretRef:
+              name: alpaca
+          - secretRef:
+              name: finnhub

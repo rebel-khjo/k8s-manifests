@@ -1,0 +1,33 @@
+auth:
+  enablePostgresUser: false
+  existingSecret: "postgresql-auth"
+  ## @param auth.secretKeys.adminPasswordKey Name of key in existing secret to use for PostgreSQL credentials. Only used when `auth.existingSecret` is set.
+  ## @param auth.secretKeys.userPasswordKey Name of key in existing secret to use for PostgreSQL credentials. Only used when `auth.existingSecret` is set.
+  ## @param auth.secretKeys.replicationPasswordKey Name of key in existing secret to use for PostgreSQL credentials. Only used when `auth.existingSecret` is set.
+  ##
+  secretKeys:
+    adminPasswordKey: ADMIN_PASSWORD
+  ## @param auth.usePasswordFiles Mount credentials as a files instead of using an environment variable
+  ##
+  usePasswordFiles: true
+
+primary:
+  resources:
+    requests:
+      cpu: 0.5
+      memory: 512Mi
+    limits:
+      cpu: 3
+      memory: 512Mi
+  persistence:
+    enabled: true
+    volumeName: "data"
+    mountPath: /bitnami/postgresql
+    accessModes:
+    - ReadWriteOnce
+    size: 10Gi
+    existingClaim: "postgresql"
+  service:
+    type: NodePort
+    nodePorts:
+      postgresql: "30432"

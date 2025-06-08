@@ -1,0 +1,33 @@
+apiVersion: networking.istio.io/v1
+kind: VirtualService
+metadata:
+  name: stock-ingress
+  namespace: istio-system
+spec:
+  hosts:
+  - stock-api.beer1.com
+  gateways:
+  - beer1-com
+  http:
+  - route:
+    - destination:
+        host: stock-backend.stock.svc.cluster.local
+        port: 
+          number: 80
+      headers:
+        response:
+          remove:
+            - "x-envoy-upstream-service-time"
+            - "server"
+    corsPolicy:
+      allowMethods:
+        - GET
+        - POST
+        - PUT
+        - PATCH
+        - DELETE
+        - OPTIONS
+      allowOrigin:
+        - http://localhost:8000
+      allowHeaders:
+        - "*"
