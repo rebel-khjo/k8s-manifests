@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: oom-test-guaranteed
+  name: oom-test-guaranteed
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: oom-test-guaranteed
+  template:
+    metadata:
+      labels:
+        app: oom-test-guaranteed
+    spec:
+      containers:
+      - image: beer1/oom-test
+        imagePullPolicy: Always
+        name: oom-test
+        resources:
+          limits:
+            cpu: "1"
+            memory: 256Mi
+          requests:
+            cpu: "1"
+            memory: 256Mi

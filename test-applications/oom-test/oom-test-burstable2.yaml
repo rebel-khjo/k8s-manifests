@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: oom-test-burstable2
+  name: oom-test-burstable2
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: oom-test-burstable2
+  template:
+    metadata:
+      labels:
+        app: oom-test-burstable2
+    spec:
+      containers:
+      - image: beer1/oom-test
+        imagePullPolicy: Always
+        name: oom-test
+        resources:
+          limits:
+            cpu: "1"
+            memory: 1024Mi
+          requests:
+            cpu: 100m
+            memory: 512Mi

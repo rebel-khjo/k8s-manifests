@@ -9,6 +9,7 @@ spec:
       targetRevision: 0.1.0
       chart: spring-app
       helm:
+        releaseName: todo-api
         valueFiles:
           - $values/todo-list/todo-api.yaml
     - repoURL: 'https://github.com/beer-one/k8s-manifests.git'
