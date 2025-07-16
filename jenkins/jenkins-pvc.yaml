@@ -3,6 +3,8 @@ apiVersion: v1
 metadata:
   name: jenkins-local
   namespace: jenkins
+  labels:
+    syncd-by: argocd-test
 spec:
   accessModes:
   - ReadWriteOnce
